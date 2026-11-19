@@ -16,3 +16,4 @@ ipywidgets
 inquirer
 prettytable
 jira
+python-dotenv
