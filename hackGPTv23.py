@@ -70,7 +70,18 @@ jailbreakdata = pd.concat([jailbreakdata, jailbreaknew_row], ignore_index=True)
 with expand_section:
     #st.subheader("👤 Manage Personas")
     if selected_persona:
-        with open(os.path.join("personas", f"{selected_persona}.md"), "r") as f:
+    # Load selected persona safely
+os.makedirs("personas", exist_ok=True)
+persona_text = ""
+if selected_persona and selected_persona != "None":
+    persona_path = os.path.join("personas", f"{selected_persona}.md")
+
+    if os.path.isfile(persona_path):
+        with open(persona_path, "r", encoding="utf-8") as f:
+            persona_text = f.read()
+    else:
+        st.warning(f"Persona file not found: {selected_persona}.md")
+
             persona_text = f.read()
         new_persona_name = st.text_input("Persona Name:", value=selected_persona)
         new_persona_prompt = st.text_area("Persona Prompt:", value=persona_text, height=100)
