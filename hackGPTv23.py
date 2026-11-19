@@ -159,8 +159,7 @@ def get_ai_response(text_input):
 
     response = client.chat.completions.create(model=MODEL,
     messages=messages)
-    return response['choices'][0]['message']['content']
-
+    return response.choices[0].message.content
 def add_text(text_input):
     response = openai.Completion.create(
         model=MODEL,
