@@ -157,16 +157,8 @@ def get_ai_response(text_input):
     messages = [{'role': 'system', 'content': 'You are a helpful assistant.'},
                 {'role': 'user', 'content': text_input+persona_text}]
 
-    response = openai.ChatCompletion.create(
-        model=MODEL,
-        messages=messages,
-        temperature=temperature,
-        max_tokens=max_tokens,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0.6,
-        stop=[" Human:", " AI:"]
-    )
+    response = client.chat.completions.create(model=MODEL,
+    messages=messages)
     return response['choices'][0]['message']['content']
 
 def add_text(text_input):
